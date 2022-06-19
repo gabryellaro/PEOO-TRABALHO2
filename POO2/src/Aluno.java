@@ -10,6 +10,15 @@ public class Aluno{
     }
     public Aluno(){}
 
+    //caso o usuário escreva a string de um tamanho diferente do proposto
+    public String tamanhoResposta(String resposta){
+        if (resposta.length() > 9){
+           return resposta;
+        }else{
+           return resposta.substring(0, 9);
+        }
+     }
+
     //a idéia era pegar 2 strings, separar os caractéres de cada uma e comparalos individualmente(funcional)
     public int calcularNota(String rAluno,String gabarito){
         //split separa a string, com a configuração dele, ele vai separar caractére por caractére

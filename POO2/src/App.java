@@ -32,15 +32,16 @@ public class App {
                 String nomeDisciplina= input.next();
                 System.out.println("Respostas e Aluno ");
                 String respostas=input.next();
-                aluno.tamanhoResposta(respostas);//caso o gabarito seja mais de 10 letras
+                try {
+                    aluno.tamanhoResposta(respostas);//caso o gabarito esteja errado;
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
                 String nomeAluno= input.nextLine();
                 //junta as strings de repostas e nome do aluno, separando elas por um tab;
                 String dados = respostas.toUpperCase()+"\t"+nomeAluno;
-                //Arquivo da disciplina
-                System.out.println("Insira o gabarito Oficial:");
-                String gabarito=input.next();
-                aluno.tamanhoResposta(gabarito);      
-                disciplina.novoArquivo(dir,nomeDisciplina,dados,gabarito);
+                //Arquivo da disciplina    
+                disciplina.novoArquivo(nomeDisciplina,dados);
                 //Disciplina adiconada a lista de disciplinas
                 disciplina.novaDisciplina(dir,nomeDisciplina);
                 //adicionando outros alunos
@@ -52,25 +53,28 @@ public class App {
                         System.out.println("Respostas e Aluno ");
                         respostas=input.next();
                         nomeAluno=input.nextLine();
-                        aluno.tamanhoResposta(respostas);
-                        disciplina.novoArquivo(dir,nomeDisciplina,dados,gabarito);
-                    }
-                    else if(loop==2){
-                        break;
-                    }
-                    else{
-                        System.out.println("OPÇÃO INVÁLIDA");
+                        try {
+                            aluno.tamanhoResposta(respostas);//caso o gabarito esteja errado;
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                        dados = respostas.toUpperCase()+"\t"+nomeAluno;
+                        disciplina.novoArquivo(nomeDisciplina,dados);
                     }
                 }
                 continue;
                 case 2:
-                System.out.println("Insira o nome da disciplina :");
+                System.out.println("INSIRA O NOME DA DISCIPLINA :");
                 String pesquisa=input.next();
-                /*o método tem que entregar a string ou o File ?
-                  talvez os dois, por isso talvez tenha que sobreescrever o método, pois é preciso pegar o arquivo designado
-                */
-                disciplina.search(pesquisa,disciplina.getDisciplinas());
-                //System.out.println("O gabarito oficial de "+);
+                System.out.println("INSIRA O GABARITO OFICAL :");
+                String gabarito=input.next();
+                try {
+                    aluno.tamanhoResposta(gabarito);//caso o gabarito esteja errado;
+                } catch (Exception e) {
+                    System.out.println(e);
+                }  
+                disciplina.gabarito(disciplina.search(pesquisa), gabarito,pesquisa);
+                System.out.println("O gabarito oficial de: "+pesquisa+" é :"+gabarito);
                 continue;
             }
         }

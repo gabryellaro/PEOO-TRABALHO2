@@ -1,3 +1,5 @@
+import exception.GabaritoInvalidoException;
+
 //ainda sem propósito exato
 public class Aluno{
     protected String nome;
@@ -11,11 +13,11 @@ public class Aluno{
     public Aluno(){}
 
     //caso o usuário escreva a string de um tamanho diferente do proposto
-    public String tamanhoResposta(String resposta){
-        if (resposta.length() > 9){
+    public String tamanhoResposta(String resposta) throws GabaritoInvalidoException{
+        if (resposta.length() == 10){
            return resposta;
         }else{
-           return resposta.substring(0, 9);
+            throw new GabaritoInvalidoException();
         }
      }
 
